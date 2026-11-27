@@ -11,23 +11,21 @@ Multiplying:
     >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
     [[13 16]]
 
-Invalid inputs raise an error (the exact type depends on the NumPy version):
+Invalid inputs raise an error:
 
 String m_a:
 
-    >>> try:
-    ...     lazy_matrix_mul("Holberton", [[5, 6], [7, 8]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> lazy_matrix_mul("Holberton", [[5, 6], [7, 8]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a must be a list
 
 String m_b:
 
-    >>> try:
-    ...     lazy_matrix_mul([[5, 6], [7, 8]], "Holberton")
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> lazy_matrix_mul([[5, 6], [7, 8]], "Holberton")
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b must be a list
 
 Empty m_a:
 
@@ -47,43 +45,38 @@ Empty m_b:
 
 Not a number in m_a:
 
-    >>> try:
-    ...     lazy_matrix_mul([[5, "6"], [7, 8]], [[5, 6], [7, 8]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> lazy_matrix_mul([[5, "6"], [7, 8]], [[5, 6], [7, 8]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a should contain only integers or floats
 
 Not a number in m_b:
 
-    >>> try:
-    ...     lazy_matrix_mul([[5, 6], [7, 8]], [[5, "6"], [7, 8]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> lazy_matrix_mul([[5, 6], [7, 8]], [[5, "6"], [7, 8]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b should contain only integers or floats
 
 Rows of m_a of different sizes:
 
-    >>> try:
-    ...     lazy_matrix_mul([[5, 6, 10], [7, 8]], [[5, 6], [7, 8]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> lazy_matrix_mul([[5, 6, 10], [7, 8]], [[5, 6], [7, 8]])
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_a must should be of the same size
 
 Rows of m_b of different sizes:
 
-    >>> try:
-    ...     lazy_matrix_mul([[5, 6], [7, 8]], [[5, 6, 1], [7, 8]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> lazy_matrix_mul([[5, 6], [7, 8]], [[5, 6, 1], [7, 8]])
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_b must should be of the same size
 
 Matrices that can't be multiplied:
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, 2, 3], [3, 4, 5]], [[1, 2], [3, 4]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> lazy_matrix_mul([[1, 2, 3], [3, 4, 5]], [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a and m_b can't be multiplied
 
 None as m_b:
 
