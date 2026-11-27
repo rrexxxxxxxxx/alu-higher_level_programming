@@ -11,12 +11,87 @@ Multiplying:
     >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
     [[13 16]]
 
-Incompatible sizes:
+Invalid inputs raise an error (the exact type depends on the NumPy version):
 
-    >>> lazy_matrix_mul([[1, 2]], [[1, 2]]) # doctest: +IGNORE_EXCEPTION_DETAIL
-    Traceback (most recent call last):
-    ...
-    ValueError: shapes not aligned
+String m_a:
+
+    >>> try:
+    ...     lazy_matrix_mul("Holberton", [[5, 6], [7, 8]])
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+String m_b:
+
+    >>> try:
+    ...     lazy_matrix_mul([[5, 6], [7, 8]], "Holberton")
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+Empty m_a:
+
+    >>> try:
+    ...     lazy_matrix_mul([], [[5, 6], [7, 8]])
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+Empty m_b:
+
+    >>> try:
+    ...     lazy_matrix_mul([[5, 6], [7, 8]], [])
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+Not a number in m_a:
+
+    >>> try:
+    ...     lazy_matrix_mul([[5, "6"], [7, 8]], [[5, 6], [7, 8]])
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+Not a number in m_b:
+
+    >>> try:
+    ...     lazy_matrix_mul([[5, 6], [7, 8]], [[5, "6"], [7, 8]])
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+Rows of m_a of different sizes:
+
+    >>> try:
+    ...     lazy_matrix_mul([[5, 6, 10], [7, 8]], [[5, 6], [7, 8]])
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+Rows of m_b of different sizes:
+
+    >>> try:
+    ...     lazy_matrix_mul([[5, 6], [7, 8]], [[5, 6, 1], [7, 8]])
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+Matrices that can't be multiplied:
+
+    >>> try:
+    ...     lazy_matrix_mul([[1, 2, 3], [3, 4, 5]], [[1, 2], [3, 4]])
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
+
+None as m_b:
+
+    >>> try:
+    ...     lazy_matrix_mul([[5, 6], [7, 8]], None)
+    ... except (TypeError, ValueError):
+    ...     print("error")
+    error
 
 Missing arguments:
 
@@ -24,3 +99,8 @@ Missing arguments:
     Traceback (most recent call last):
     ...
     TypeError: missing 1 required positional argument: 'm_b'
+
+    >>> lazy_matrix_mul() # doctest: +IGNORE_EXCEPTION_DETAIL
+    Traceback (most recent call last):
+    ...
+    TypeError: missing 2 required positional arguments: 'm_a' and 'm_b'
